@@ -1,9 +1,11 @@
 import requests
 import json
+from pprint import pprint as print
 
-input = str(input('valyuta kiriting: '))
+inputs = str(input('valyuta kiriting: '))
 
-url = f'https://v6.exchangerate-api.com/v6/YOUR-API-KEY/latest/USD'
+url = 'https://v6.exchangerate-api.com/v6/e06e1270a84ce6eb8b4c162a/latest/'+inputs
 
 response = requests.get(url)
-rese = json.loads(response.text)
+res = json.loads(response.text)
+print(res['conversion_rates']['UZS'])
