@@ -19,7 +19,7 @@ async def second(message: types.Message):
     url = 'https://v6.exchangerate-api.com/v6/e06e1270a84ce6eb8b4c162a/latest/'
     text = message.text
     sum = 'so`m'
-    dollor = 'do`llor'
+    usd = 'do`llor'
     rub = 'rubl'
     if text == "Do`llar -> So`m":
         inputs = "USD"
@@ -28,30 +28,56 @@ async def second(message: types.Message):
         response = requests.get(url+inputs)
         res = json.loads(response.text)
         result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {sum}", reply_markup=btn)
 
     elif text == "So`m -> Do`llar":
         inputs = "UZS"
         outputs = "USD"
+
+        response = requests.get(url + inputs)
+        res = json.loads(response.text)
+        result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {usd}", reply_markup=btn)
+
     elif text == "Rubl -> Do`llar":
         inputs = "RUB"
         outputs = "USD"
+
+        response = requests.get(url + inputs)
+        res = json.loads(response.text)
+        result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {usd}", reply_markup=btn)
+
     elif text == "Do`llar -> Rubl":
         inputs = "USD"
         outputs = "RUB"
+
+        response = requests.get(url + inputs)
+        res = json.loads(response.text)
+        result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {rub}", reply_markup=btn)
+
     elif text == "Rubl -> So`m":
         inputs = "RUB"
         outputs = "UZS"
+
+        response = requests.get(url + inputs)
+        res = json.loads(response.text)
+        result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {sum}", reply_markup=btn)
+
     elif text == "So`m -> Rubl":
         inputs = "UZS"
         outputs = "RUB"
+
+        response = requests.get(url + inputs)
+        res = json.loads(response.text)
+        result = res['conversion_rates'][outputs]
+        await bot.send_message(message.chat.id, f"{result}  {rub}", reply_markup=btn)
+
     else:
         await bot.send_message(message.chat.id, '❌ Siz noto`g`ri ma`lumot kiritdingiz, tugmalardan birini tanlashingiz kerak!', reply_markup=btn)
-    url = 'https://v6.exchangerate-api.com/v6/e06e1270a84ce6eb8b4c162a/latest/' + inputs
-
-    response = requests.get(url)
-    res = json.loads(response.text)
-    result = res['conversion_rates'][outputs]
-    await bot.send_message(message.chat.id, result, reply_markup=btn)
+    
 
 
 if __name__ == '__main__':
